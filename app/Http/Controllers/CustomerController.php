@@ -14,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return view('customers.index', compact('customers'));
     }
 
     /**
@@ -46,7 +47,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customers.show', compact('customer'));
     }
 
     /**
@@ -57,7 +58,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', compact('customer'));
     }
 
     /**
@@ -67,9 +68,16 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->postcode = $request->postcode;
+        $customer->address = $request->address;
+        $customer->tel = $request->tel;
+        $customer->save();
+        return redirect('/customers');
     }
 
     /**
@@ -80,6 +88,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return redirect('/customers');
     }
 }
