@@ -30,7 +30,7 @@
             </tr>
         @endforeach
     </table>
-    <a href="/customers/create">新規作成</a>
+    <button onclick="location.href='/customers/search'">新規作成</button>
 </body>
 
 </html>
